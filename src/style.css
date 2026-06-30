@@ -47,6 +47,10 @@ body, p, h1, h2, h3, h4, h5, h6{
   margin-top: var(--space-md);
 }
 
+.mt-4{
+  margin-top: var(--space-lg);
+}
+
 .flex{
   display:flex;
 }
@@ -118,12 +122,12 @@ body{
           }
 
           .weather-card{
-            gap:var(--space-sm);
+            gap:var(--space-ssm);
           }
 
           .weather-icon{
-            width:4.5rem;
-            height:4.5rem;
+            width:4.25rem;
+            height:4.25rem;
             object-fit: contain;
           }
 

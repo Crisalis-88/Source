@@ -4,6 +4,7 @@ import { position } from "../services/location.js";
 
 import cloudyNight from "../../assets/cloudy-night-2.svg"
 import clearDay from "../../assets/clear-day.svg";
+import cloudy from "../../assets/cloudy.svg"
 import partlyCloudyDay from "../../assets/cloudy-day-1.svg";
 
 export default async function renderWeatherCard(){
@@ -22,9 +23,9 @@ export default async function renderWeatherCard(){
     weatherEl.classList.add("weather-card", "flex", "flex-column");
     
     weatherEl.innerHTML = `
-        <img class = "weather-icon mt-2" src="${currentIcon}" />
+        <img class = "weather-icon mt-4" src="${currentIcon}" />
         <h2 class="temperature">${temp}</h2>
-        <p class="card-text mt-2">${conditionDescription}</p>
+        <p class="card-text">${conditionDescription}</p>
     `
     
     const townEl = document.createElement("p");
@@ -35,7 +36,7 @@ export default async function renderWeatherCard(){
     weatherEl.prepend(townEl);
 
     return weatherEl;
-}
+} 
 
 function renderIcon(weather){
     let currentWeatherIcon = weather.currentConditions.icon;
@@ -45,6 +46,8 @@ function renderIcon(weather){
              return cloudyNight;
         case "clear-day":
             return clearDay;
+        case "cloudy":
+            return cloudy;
         case "partly-cloudy-day":
             return partlyCloudyDay;
     }
