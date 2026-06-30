@@ -1,5 +1,4 @@
 import { defaultLocation } from "./weather-api";
-import { position } from "./location";
 
 export default async function getTown(position){
     let url;

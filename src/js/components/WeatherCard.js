@@ -2,32 +2,50 @@ import getWeather from "../services/weather-api.js"
 import getTown from "../services/town-api.js";
 import { position } from "../services/location.js";
 
+import cloudyNight from "../../assets/cloudy-night-2.svg"
+import clearDay from "../../assets/clear-day.svg";
+import partlyCloudyDay from "../../assets/cloudy-day-1.svg";
+
 export default async function renderWeatherCard(){
     const weather = await getWeather(position);
     const town = await getTown(position);
+
+    console.log(weather);
+
+    let currentIcon = renderIcon(weather)
 
     let temp = weather.currentConditions.temp;
     let conditionDescription = weather.currentConditions.conditions;
     
     const weatherEl = document.createElement("div");
 
-    weatherEl.classList.add("weather");
-
-    const townEl = document.createElement("div");
-
-    if (town.locality){
-        townEl.innerHTML = `<p class="card-header">${town.locality}</p>`
-    }else{
-        townEl.innerHTML = `<p class="card-header">${town}</p>`
-    }
-
-    let imgUrl = "../../assets/day.svg"
-
+    weatherEl.classList.add("weather-card", "flex", "flex-column");
+    
     weatherEl.innerHTML = `
-        ${townEl.innerHTML}
-        <img src="${imgUrl}" />
+        <img class = "weather-icon mt-2" src="${currentIcon}" />
         <h2 class="temperature">${temp}</h2>
-        <p class="card-header">${conditionDescription}</p>
+        <p class="card-text mt-2">${conditionDescription}</p>
     `
+    
+    const townEl = document.createElement("p");
+
+    townEl.className = "card-header";
+    townEl.textContent = town.locality ?? town;
+
+    weatherEl.prepend(townEl);
+
     return weatherEl;
+}
+
+function renderIcon(weather){
+    let currentWeatherIcon = weather.currentConditions.icon;
+
+    switch (currentWeatherIcon){
+        case "partly-cloudy-night":
+             return cloudyNight;
+        case "clear-day":
+            return clearDay;
+        case "partly-cloudy-day":
+            return partlyCloudyDay;
+    }
 }

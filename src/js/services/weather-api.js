@@ -1,5 +1,3 @@
-import { position } from "./location";
-
 
 export const defaultLocation = "Moscow";
 const unitGroup = "metric";
