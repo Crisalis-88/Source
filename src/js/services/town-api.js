@@ -1,24 +1,33 @@
-import { defaultLocation } from "./weather-api";
+import location from "./location.js"
+import { makeTownURL } from "../utils/urls.js"
 
-export default async function getTown(position){
-    let url;
-    console.log(defaultLocation)
+const userTown = await getTown(location);
+export default userTown;
+
+async function getTown(position){
     
     try{
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
-    
-        url = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`;
-    
+        if (typeof location !== "object"){
+            throw new Error("location in not an object");
+        }
+
+        let url = makeTownURL(location);
+
         const res = await fetch(url);
+
+        if (!res.ok){
+            throw new Error("Failed to fetch user`s town");
+        }
+        
         const data = await res.json();
-        console.log(data)
+        console.log(data);
     
-        return data;
-    }catch(error){
-        console.error("error:", error)
-        console.log(defaultLocation)
-        return defaultLocation;
+        return data.locality;
+    }
+    catch(error){
+        console.error("error:", error);
+        console.log("catch block", location);
+        return location;
     }
     
     
@@ -30,5 +39,4 @@ export default async function getTown(position){
     // }
 
     //  console.log(localStorage.getItem("lat"), localStorage.getItem("lon"))
-
 }

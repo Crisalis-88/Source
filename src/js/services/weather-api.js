@@ -1,9 +1,26 @@
+import location  from "./location.js";
+import { makeWeatherURL } from "../utils/urls.js";
 
-export const defaultLocation = "Moscow";
 const unitGroup = "metric";
 const contentType = 'json';
 const API_KEY = import.meta.env.VITE_API_KEY;
 
+let weatherData = await getWeather(location);
+
+let condition = weatherData.condition;
+export const days = weatherData.days;
+
+console.log(days)
+
+console.log(weatherData);
+
+export const temp = condition.temp;
+export const conditionDescription = condition.conditions;
+export const weatherIcon = condition.icon;
+export const precipRate = condition.precip;
+
+console.log(weatherIcon)
+console.log("bebeb", temp, conditionDescription)
 
 async function fetchWeather(url){
   let res = await fetch(url);
@@ -12,29 +29,30 @@ async function fetchWeather(url){
     throw new Error("request to weather api has failed");
   }
 
-  let data = await res.json()
-  return data
+  let data = await res.json();
+
+  return { 
+    condition: data.currentConditions, 
+    days: data.days 
+  };
 }
 
-export default async function getWeather(position){
+async function getWeather(location){
 
   try {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
+    if (typeof location !== "object"){
+      throw new Error("Failed to get user`s coords, using defaultLocation instead 2");
+    }
+
     console.log(`Latitude: ${lat}, Longitude: ${lon}`);
 
-    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${lat},${lon}?unitGroup=${unitGroup}&key=${API_KEY}&contentType=${contentType}`;
+    let url = makeWeatherUrl(location, unitGroup, API_KEY, contentType);
 
     return await fetchWeather(url)
   }
 
   catch(error){
-    //console.error("Permission denied", error.message);
-    if (error.code === error.PERMISSION_DENIED) {
-      console.log("User denied location permission.", error);
-    }
-
-    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${defaultLocation}?unitGroup=${unitGroup}&key=${API_KEY}&contentType=${contentType}`;
+    const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unitGroup}&key=${API_KEY}&contentType=${contentType}`;
     return await fetchWeather(url)
   }
 }

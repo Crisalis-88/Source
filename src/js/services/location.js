@@ -1,31 +1,45 @@
+const defaultLocation = "Moscow";
 
-const maxAccuracy = 31000;
-
+const maxAccuracy = 10000;
 
 const options = {
-    timeout:14000,
+    enableHighAccuracy:true,
+    timeout:10000,
     maximumAge:10000,  
 }
 
-export const position = await getAccuratePos();
-console.log(position.coords.accuracy)
+const location = await getPosition();
+export default location;
 
-function getAccuratePos(){
-  return new Promise((resolve, reject) => {
-    let id = navigator.geolocation.watchPosition(
-      (position) => {
-        let acc = position.coords.accuracy
-        console.log(acc)
-      
-        if (acc <= maxAccuracy){
-          navigator.geolocation.clearWatch(id);
-          resolve(position);
+console.log(location)
+
+function getPosition(){ 
+  return new Promise(
+    (resolve, reject) => {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let lon = position.coords.longitude;
+        let lat = position.coords.latitude;
+
+        console.log(position.coords.accuracy)
+        if (position.coords.accuracy < maxAccuracy){
+          resolve({"latitude": lat, "longitude":lon});
+        }else{
+          console.log("Accuracy is low, using default location")
+          resolve(defaultLocation);
         }
+
       },
 
-      (error) => {reject(error); console.log("fuck")},
-      options
-    )
-    }
-  )
+    (error) => {
+      if (error.code === error.PERMISSION_DENIED) {
+        console.warn("User denied location permission.", error);
+      }
+
+      console.log(defaultLocation)
+      resolve(defaultLocation);
+    },
+
+    options)
+  });
 }
+
