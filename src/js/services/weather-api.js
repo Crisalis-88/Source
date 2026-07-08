@@ -18,7 +18,7 @@ export const weatherIcon = condition.icon;
 export const precipRate = condition.precip;
 
 console.log(weatherIcon)
-console.log("bebeb", temp, conditionDescription)
+console.log("bebeb", condition)
 
 async function fetchWeather(url){
   let res = await fetch(url);
@@ -35,7 +35,7 @@ async function fetchWeather(url){
   };
 }
 
-async function getWeather(location){
+export async function getWeather(location){
 
   try {
     if (typeof location !== "object"){

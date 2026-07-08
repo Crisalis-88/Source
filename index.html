@@ -9,8 +9,12 @@
   <body>
     <div id="app">
       <div class="container">
-        <header class="header">
+        <header class="header flex flex-row align-center justify-between">
           <h1>Hello User</h1>
+          <form action="GET">
+            <input type="text" id="townSearch" name="town">
+            <img id="townSerachIcon" class = 'icon' src="./src/assets/search-svgrepo-com.svg" alt="">
+          </form>
         </header>
         <main>
           <div class="flex flex-row justify-center cards">

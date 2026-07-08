@@ -1,3 +1,3 @@
 let date = new Date()
 
-console.log(date.getUTCMonth())
+export default date = date.getHours();

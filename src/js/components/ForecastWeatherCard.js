@@ -1,5 +1,7 @@
 import { hours } from "../services/weather-api";
 import { renderIcon } from "../utils/icons.js";
+import date from "../utils/date.js";
+
 import displayForecastWeatherCard from "../app.js";
 
 let setsOfHours = getSetsOfHours();
@@ -15,7 +17,7 @@ export default function renderForecastWeatherCard(){
 
     forecastWeatherEl.addEventListener("click", (event) => {
 
-        handleClick(true);
+        handleClick();
         forecastWeatherEl.removeEventListener("click", this);
     })
 
@@ -36,7 +38,7 @@ export default function renderForecastWeatherCard(){
     return forecastWeatherEl;
 }
 
-function handleClick(isDelete){
+function handleClick(){
 
     if (setsOfHoursIdx >= setsOfHours.length - 1){
         setsOfHoursIdx = 0
@@ -44,16 +46,14 @@ function handleClick(isDelete){
         setsOfHoursIdx++;
     }
 
-    if(isDelete){
-        displayForecastWeatherCard(true);
-    }else{
-        displayForecastWeatherCard(false)
-    }
+
+    displayForecastWeatherCard(true);
+
 }
 
 function getSetsOfHours(){
-    let startHour = 1;
-    let endHour = 5;
+    let startHour = date;
+    let endHour = date + 4;
 
 
     let setsOfHours = []

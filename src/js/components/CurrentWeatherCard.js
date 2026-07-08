@@ -10,7 +10,7 @@ export default function renderCurrentWeatherCard(){
     let currentIcon = renderIcon(weatherIcon, precipRate);
     const weatherEl = document.createElement("div");
 
-    weatherEl.classList.add("weather-card", "flex", "flex-column");
+    weatherEl.classList.add("weather-card", "flex", "flex-column", "align-center");
     
     weatherEl.innerHTML = `
         <img class = "current-weather-icon mt-4" src="${currentIcon}" />

@@ -1,10 +1,14 @@
 import "../style.css";
 import renderCurrentWeatherCard from "./components/CurrentWeatherCard.js";
 import renderForecastWeatherCard from "./components/ForecastWeatherCard.js";
+import renderTownSearchBar from "./components/SerachBar.js";
+
 
 let app = document.getElementById("app");
 
 async function init (){
+
+    renderTownSearchBar()
     
     let currentWeatherEl = renderCurrentWeatherCard();
     console.log(currentWeatherEl);
