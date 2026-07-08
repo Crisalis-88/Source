@@ -8,26 +8,29 @@ import rainySmall from "../../assets/rainy-sm.svg";
 import rainyMedium from "../../assets/rainy-md.svg"
 import rainyStrong from "../../assets/rainy-lg.svg";
 
-let icons;
-
-
 export function renderIcon(weatherIcon, precip){
 
-    if (weatherIcon == "partly-cloudy-night"){
-        return cloudyNight
-    }else if(weatherIcon == "clear-day"){
-        return clearDay;
-    }else if(weatherIcon == "cloudy"){
-        return cloudy;
-    }else if (weatherIcon == "partly-cloudy-day"){
-        return partlyCloudyDay;
-    }else if (weatherIcon == 'clear-night'){
-        return clearNight;
-    }else if(weatherIcon == "rain" && precip < 2.5){
+    // rendering icons that need only weatherIcon property
+    switch (weatherIcon){
+        case "partly-cloudy-day":
+            return partlyCloudyDay;
+        case "partly-cloudy-night":
+            return cloudyNight;
+        case "clear-day":
+            return clearDay;
+        case "cloudy":
+            return cloudy;
+        case "clear-night":
+            return clearNight;
+    }
+
+    // render icons that need weahterIcon and preciption rate
+    if(weatherIcon == "rain" && precip < 2.5){
         return rainySmall;
     }else if(weatherIcon == "rain" && precip < 7.5){
         return rainyMedium;
-    }else if(weatherIcon == "rain" && precip > 7.5){
+    }else if(weatherIcon == "rain" && precip >= 7.5){
         return rainyStrong;
     }
+
 }

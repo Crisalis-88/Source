@@ -8,9 +8,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 let weatherData = await getWeather(location);
 
 let condition = weatherData.condition;
-export const days = weatherData.days;
-
-console.log(days)
+export const hours = weatherData.day.hours;
 
 console.log(weatherData);
 
@@ -31,9 +29,9 @@ async function fetchWeather(url){
 
   let data = await res.json();
 
-  return { 
+  return {
     condition: data.currentConditions, 
-    days: data.days 
+    day: data.days[0],
   };
 }
 

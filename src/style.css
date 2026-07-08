@@ -2,8 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root{
-  --bg:linear-gradient(140deg, #00D250, #0072FF);
-  --primary-color:#ffffef;
+  --bg:#e5e5e5d1;
+  --card-bg-color:#f8f8f8;
+  --primary-color:#212121ea;
+  --secondary-color:#212121c8;
 
   --space-ssm:0.25rem;
   --space-sm:0.5rem;
@@ -62,11 +64,16 @@ ul{
 .flex-row{
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .flex-column{
   flex-direction: column;
   align-items: center;
+}
+
+.nowrap{
+  flex-wrap: nowrap;
 }
 
 .gap-1{
@@ -93,8 +100,29 @@ ul{
   justify-content: center;
 }
 
+.secondary-text{
+  color: var(--secondary-color);
+}
+
+.display-none{
+  display: none;
+}
+
+.display-block{
+  display: block;
+}
+
+.card-style{
+  background-color: var(--card-bg-color);
+  border-radius: var(--primary-border-radius);
+  box-shadow:0px 1px 7px rgba(14, 14, 14, 0.2);
+  padding:var(--space-md);
+  max-width: 330px;
+  min-width:200px;
+}
+
 body{
-  background-image: var(--bg);
+  background-color: var(--bg);
   background-repeat: no-repeat;
   min-height:100dvh;
   color:var(--primary-color);
@@ -121,11 +149,6 @@ body{
       width:min(810px, 85vw);
       .card{
         flex:0 1 320px;
-        max-width: 400px;
-        min-width:200px;
-        box-shadow:0px 1px 7px rgba(010, 010, 010, 0.2);
-        border-radius: var(--primary-border-radius);
-        padding:var(--space-md);
         text-align: center;
 
         @media (max-width:400px){
@@ -137,16 +160,17 @@ body{
           }
 
           .card-text{
-            font-size:clamp(0.25rem, var(--font-size-xxl), 3rem);
+            font-size:clamp(0.25rem, 0.125rem + var(--font-size-xl), 3rem);
+            color:var(--secondary-color)
           }
 
           .weather-card{
             gap:var(--space-ssm);
           }
 
-          .weather-icon{
-            width:4.25rem;
-            height:4.25rem;
+          .current-weather-icon{
+            width:6.25rem;
+            height:6.25rem;
             filter: drop-shadow(4px 6px 8px raba(0, 0, 0, 0.5));
             object-fit: contain;
           }
@@ -156,7 +180,13 @@ body{
           }
 
           .day{
-            font-size: var(--font-size-xxl);
+            background-color: var(--card-bg-color);
+            display:flex;
+            flex-direction: row;
+            justify-content: space-between;
+            flex-wrap: nowrap!;
+            font-size: var(--font-size-xl);
+
           }
       }
 

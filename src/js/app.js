@@ -10,9 +10,21 @@ async function init (){
     console.log(currentWeatherEl);
     document.getElementById("currentWeatherCard").append(currentWeatherEl);
 
-    let forecastWeatherEl = renderForecastWeatherCard();
-    console.log(forecastWeatherEl);
-    document.getElementById("forecastWeatherCard").append(forecastWeatherEl);
+    displayForecastWeatherCard();
+}
+
+let forecastWeatherEl;
+export default function displayForecastWeatherCard(isDelete){
+    if(isDelete){
+        forecastWeatherEl.remove();
+        forecastWeatherEl = renderForecastWeatherCard();
+        console.log(forecastWeatherEl);
+        document.getElementById("forecastWeatherCard").append(forecastWeatherEl);
+    }else{
+        forecastWeatherEl = renderForecastWeatherCard();
+        console.log(forecastWeatherEl);
+        document.getElementById("forecastWeatherCard").append(forecastWeatherEl);
+    }
 }
 
 init();
