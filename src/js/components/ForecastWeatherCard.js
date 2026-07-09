@@ -2,13 +2,14 @@ import { hours } from "../services/weather-api";
 import { renderIcon } from "../utils/icons.js";
 import date from "../utils/date.js";
 
-import displayForecastWeatherCard from "../app.js";
+import { displayForecastWeatherCard } from "../app.js";
 
 let setsOfHours = getSetsOfHours();
 let setsOfHoursIdx = 0;
 
 // Array(hours) -> Object(weather element)
 // produce html weather element and fill it using the given forecast
+
 export default function renderForecastWeatherCard(){
     let dayHours = setsOfHours[setsOfHoursIdx];
     console.log(dayHours)
@@ -21,7 +22,7 @@ export default function renderForecastWeatherCard(){
         forecastWeatherEl.removeEventListener("click", this);
     })
 
-    forecastWeatherEl.classList.add("flex", "flex-row", "gap-1");
+    forecastWeatherEl.classList.add("flex", "flex-row", "gap-1", "primary-anim");
 
     for (let hour of dayHours){
 

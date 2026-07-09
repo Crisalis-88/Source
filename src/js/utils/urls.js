@@ -7,6 +7,11 @@ export function makeTownURL(location){
 }
 
 export function makeWeatherURL(location, unitGroup, API_KEY, contentType){
+
+    if (typeof location != 'object'){
+        return`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unitGroup}&key=${API_KEY}&contentType=${contentType}`;
+    }
+
     let lat = location.latitude;
     let lon = location.longitude;
     

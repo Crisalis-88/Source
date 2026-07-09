@@ -1,4 +1,4 @@
-const defaultLocation = "Moscow";
+const defaultLocation = "Hamburg";
 
 const maxAccuracy = 10000;
 

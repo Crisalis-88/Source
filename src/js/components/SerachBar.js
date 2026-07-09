@@ -1,11 +1,11 @@
-import { getWeather } from "../services/weather-api";
+import { conditionDescription, getWeather } from "../services/weather-api";
 
+const townForm = document.getElementById("townForm");
 const townSearch = document.getElementById("townSearch");
 const townSearchIcon = document.getElementById("townSerachIcon");
 
-export default function renderTownSearchBar(){
-    townSearch.addEventListener('focusin', (event) => {
-        console.log("serach");
+export default function setUptownSearchBar(){
+    townSearch.addEventListener('focusin', async (event) => {
         townSearchIcon.style.display = "none"
     });
 
@@ -14,8 +14,8 @@ export default function renderTownSearchBar(){
         townSearchIcon.style.display = "block"
     })
 
-    townSearch.addEventListener("submit", async () => {
-        let data = await getWeather()
-        console.log(data, "sdrg")
+    townForm.addEventListener("submit", async (event) => {
+        event.preventDefault()
+        let data = await getWeather(townSearch.value);
     })
 }

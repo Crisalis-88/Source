@@ -227,6 +227,28 @@ body{
   }
 }
 
+.days{
+  transition: all 0.1s;
+}
+
+.days:active{
+  transform: translate(0px, -5px);
+}
+
+@keyframes cardAnim {
+  0%{
+    transform: translate(0px, 0px);
+  }
+
+  50%{
+    transform: translate(0, -4px);
+  }
+
+  100%{
+    transform: translate(0px, 0px);
+  }
+}
+
 @media (max-width:800px) {
   .flex-row{
     gap:var(--space-md);

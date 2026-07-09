@@ -1,24 +1,27 @@
 import "../style.css";
 import renderCurrentWeatherCard from "./components/CurrentWeatherCard.js";
 import renderForecastWeatherCard from "./components/ForecastWeatherCard.js";
-import renderTownSearchBar from "./components/SerachBar.js";
-
+import setUptownSearchBar from "./components/SerachBar.js";
 
 let app = document.getElementById("app");
 
 async function init (){
 
-    renderTownSearchBar()
-    
-    let currentWeatherEl = renderCurrentWeatherCard();
-    console.log(currentWeatherEl);
-    document.getElementById("currentWeatherCard").append(currentWeatherEl);
+    setUptownSearchBar();
 
+    displayCurrentWeatherCard()
+    
     displayForecastWeatherCard();
 }
 
+function displayCurrentWeatherCard(){
+    let currentWeatherEl = weatherEl;
+    console.log(currentWeatherEl);
+    document.getElementById("currentWeatherCard").append(currentWeatherEl);
+}
+
 let forecastWeatherEl;
-export default function displayForecastWeatherCard(isDelete){
+export function displayForecastWeatherCard(isDelete){
     if(isDelete){
         forecastWeatherEl.remove();
         forecastWeatherEl = renderForecastWeatherCard();
@@ -30,5 +33,6 @@ export default function displayForecastWeatherCard(isDelete){
         document.getElementById("forecastWeatherCard").append(forecastWeatherEl);
     }
 }
+
 
 init();
