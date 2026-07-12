@@ -1,21 +1,39 @@
 import "../style.css";
-import renderCurrentWeatherCard from "./components/CurrentWeatherCard.js";
+import { renderCurrentWeatherCard } from "./components/CurrentWeatherCard.js";
 import renderForecastWeatherCard from "./components/ForecastWeatherCard.js";
 import renderTownSearchBar from "./components/SerachBar.js";
+import { State } from "./stores/state.js";
 
 
 let app = document.getElementById("app");
 
+export async function render(){
+
+    document.getElementById("currentWeatherCard").replaceChildren(
+        renderCurrentWeatherCard()
+    )
+    
+    document.getElementById("forecastWeatherCard").replaceChildren(
+        renderForecastWeatherCard()
+    )
+}
+
 async function init (){
 
-    renderTownSearchBar()
-    
-    let currentWeatherEl = renderCurrentWeatherCard();
-    console.log(currentWeatherEl);
-    document.getElementById("currentWeatherCard").append(currentWeatherEl);
+    renderTownSearchBar();
 
-    displayForecastWeatherCard();
+    await State.update();
+    console.log(State.location)
+    render();
+    
+    //let currentWeatherEl = renderCurrentWeatherCard();
+    //console.log(currentWeatherEl);
+    //document.getElementById("currentWeatherCard").append(currentWeatherEl);
+
+    //displayForecastWeatherCard();
 }
+
+init();
 
 let forecastWeatherEl;
 export default function displayForecastWeatherCard(isDelete){
@@ -31,4 +49,3 @@ export default function displayForecastWeatherCard(isDelete){
     }
 }
 
-init();

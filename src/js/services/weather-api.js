@@ -1,24 +1,27 @@
-import location  from "./location.js";
+// import location from "./location.js";
 import { makeWeatherURL } from "../utils/urls.js";
 
 const unitGroup = "metric";
 const contentType = 'json';
 const API_KEY = import.meta.env.VITE_API_KEY;
 
-let weatherData = await getWeather(location);
+// let weatherData = await getWeather(location);
+// console.log(weatherData)
 
-let condition = weatherData.condition;
-export const hours = weatherData.day.hours;
+// let condition = weatherData.condition;
+// export const hours = weatherData.day.hours;
 
-console.log(weatherData);
+// console.log(weatherData);
 
-export const temp = condition.temp;
-export const conditionDescription = condition.conditions;
-export const weatherIcon = condition.icon;
-export const precipRate = condition.precip;
+// export const temp = condition.temp;
+// export const conditionDescription = condition.conditions;
+// export const weatherIcon = condition.icon;
+// export const precipRate = condition.precip;
 
-console.log(weatherIcon)
-console.log("bebeb", condition)
+// onsole.log(weatherIcon)
+// console.log("bebeb", condition)
+
+console.log("ergerg")
 
 async function fetchWeather(url){
   let res = await fetch(url);
@@ -29,10 +32,7 @@ async function fetchWeather(url){
 
   let data = await res.json();
 
-  return {
-    condition: data.currentConditions, 
-    day: data.days[0],
-  };
+  return data;
 }
 
 export async function getWeather(location){
@@ -45,11 +45,13 @@ export async function getWeather(location){
     console.log(`Latitude: ${lat}, Longitude: ${lon}`);
 
     let url = makeWeatherUrl(location, unitGroup, API_KEY, contentType);
+    console.log("url:", url)
 
     return await fetchWeather(url)
   }
 
   catch(error){
+    console.log("ergr")
     const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unitGroup}&key=${API_KEY}&contentType=${contentType}`;
     return await fetchWeather(url)
   }

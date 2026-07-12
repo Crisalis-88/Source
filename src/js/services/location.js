@@ -8,12 +8,7 @@ const options = {
     maximumAge:10000,  
 }
 
-const location = await getPosition();
-export default location;
-
-console.log(location)
-
-function getPosition(){ 
+export default function getPosition(){ 
   return new Promise(
     (resolve, reject) => {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -22,6 +17,7 @@ function getPosition(){
 
         console.log(position.coords.accuracy)
         if (position.coords.accuracy < maxAccuracy){
+          console.log("its ok")
           resolve({"latitude": lat, "longitude":lon});
         }else{
           console.log("Accuracy is low, using default location")

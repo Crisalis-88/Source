@@ -1,14 +1,17 @@
-import { temp, conditionDescription, weatherIcon, precipRate } from "../services/weather-api.js";
-import userTown from "../services/town-api.js";
+
 import { renderIcon } from "../utils/icons.js";
+import { State } from "../stores/state.js";
 
 // Number, String, String, Number -> Object(weather element)
 // produce html element that represents current weather using the given weather data
 
-export default function renderCurrentWeatherCard(){
+export function renderCurrentWeatherCard(){
     
-    let currentIcon = renderIcon(weatherIcon, precipRate);
+    let currentIcon = renderIcon(State.weather.currentConditions.icon, State.weather.currentConditions.precip);
     const weatherEl = document.createElement("div");
+
+    let temp = State.weather.currentConditions.temp;
+    let conditionDescription = State.weather.currentConditions.conditions;
 
     weatherEl.classList.add("weather-card", "flex", "flex-column", "align-center");
     
@@ -21,7 +24,7 @@ export default function renderCurrentWeatherCard(){
     const townEl = document.createElement("p");
 
     townEl.className = "card-header";
-    townEl.textContent = userTown;
+    townEl.textContent = State.town;
 
     weatherEl.prepend(townEl);
 

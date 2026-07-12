@@ -1,10 +1,7 @@
-import location from "./location.js"
+
 import { makeTownURL } from "../utils/urls.js"
 
-const userTown = await getTown(location);
-export default userTown;
-
-async function getTown(position){
+export async function getTown(location){
     
     try{
         if (typeof location !== "object"){

@@ -1,4 +1,6 @@
 import { getWeather } from "../services/weather-api";
+import { State } from "../stores/state.js"
+import { render } from "../app.js";
 
 const townSearch = document.getElementById("townSearch");
 const townSearchIcon = document.getElementById("townSerachIcon");
@@ -14,8 +16,10 @@ export default function renderTownSearchBar(){
         townSearchIcon.style.display = "block"
     })
 
-    townSearch.addEventListener("submit", async () => {
-        let data = await getWeather()
-        console.log(data, "sdrg")
+    townSearch.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        console.log(townSearch.value);
+        await State.update(townSearch.value);
+        render()
     })
 }
