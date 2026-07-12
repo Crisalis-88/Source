@@ -27,6 +27,4 @@ export function renderCurrentWeatherCard(){
     townEl.textContent = State.town;
 
     weatherEl.prepend(townEl);
-
-    return weatherEl;
 } 

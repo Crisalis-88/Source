@@ -2,10 +2,11 @@ import { State } from "../stores/state.js"
 import { render } from "../app.js";
 import { renderIcon } from "../utils/icons.js";
 
-import displayForecastWeatherCard from "../app.js";
+import { displayForecastWeatherCard } from "../app.js";
 
 // Array(hours) -> Object(weather element)
 // produce html weather element and fill it using the given forecast
+
 export default function renderForecastWeatherCard(){
     let dayHours = State.setsOfHours[State.forecastIdx];
     console.log(dayHours)
@@ -18,7 +19,7 @@ export default function renderForecastWeatherCard(){
         forecastWeatherEl.removeEventListener("click", this);
     })
 
-    forecastWeatherEl.classList.add("flex", "flex-row", "gap-1");
+    forecastWeatherEl.classList.add("flex", "flex-row", "gap-1", "primary-anim");
 
     for (let hour of dayHours){
 
