@@ -51,12 +51,8 @@ export async function getWeather(location){
   }
 
   catch(error){
-<<<<<<< HEAD
     console.log("ergr")
     const url = `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=${unitGroup}&key=${API_KEY}&contentType=${contentType}`;
-=======
-    const url = makeWeatherURL(location, unitGroup, API_KEY, contentType)
->>>>>>> 6043c21c8612b5bae906b3e3e48ab675090dca28
     return await fetchWeather(url)
   }
 }

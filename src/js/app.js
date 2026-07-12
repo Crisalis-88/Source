@@ -1,13 +1,9 @@
 import "../style.css";
 import { renderCurrentWeatherCard } from "./components/CurrentWeatherCard.js";
 import renderForecastWeatherCard from "./components/ForecastWeatherCard.js";
-<<<<<<< HEAD
 import renderTownSearchBar from "./components/SerachBar.js";
 import { State } from "./stores/state.js";
 
-=======
-import setUptownSearchBar from "./components/SerachBar.js";
->>>>>>> 6043c21c8612b5bae906b3e3e48ab675090dca28
 
 let app = document.getElementById("app");
 
@@ -24,7 +20,6 @@ export async function render(){
 
 async function init (){
 
-<<<<<<< HEAD
     renderTownSearchBar();
 
     await State.update();
@@ -39,20 +34,6 @@ async function init (){
 }
 
 init();
-=======
-    setUptownSearchBar();
-
-    displayCurrentWeatherCard()
-    
-    displayForecastWeatherCard();
-}
-
-function displayCurrentWeatherCard(){
-    let currentWeatherEl = weatherEl;
-    console.log(currentWeatherEl);
-    document.getElementById("currentWeatherCard").append(currentWeatherEl);
-}
->>>>>>> 6043c21c8612b5bae906b3e3e48ab675090dca28
 
 let forecastWeatherEl;
 export function displayForecastWeatherCard(isDelete){
@@ -68,8 +49,4 @@ export function displayForecastWeatherCard(isDelete){
     }
 }
 
-<<<<<<< HEAD
-=======
-
-init();
->>>>>>> 6043c21c8612b5bae906b3e3e48ab675090dca28
+init()
