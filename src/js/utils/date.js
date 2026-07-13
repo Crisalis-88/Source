@@ -1,3 +1,9 @@
-let date = new Date()
+let time = new Date()
 
-export default date = date.getHours();
+export function getHoursDifference(timeZone){
+    hoursDifference = time.getTimezoneOffset() / 60;
+
+}
+
+export let date = time.getHours();
+console.log("current hour: ", date)

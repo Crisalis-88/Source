@@ -2,26 +2,28 @@ import { State } from "../stores/state.js"
 import { render } from "../app.js";
 import { renderIcon } from "../utils/icons.js";
 
-import { displayForecastWeatherCard } from "../app.js";
+import getSetsOfHours from "../utils/getHoursSets.js";
 
 // Array(hours) -> Object(weather element)
 // produce html weather element and fill it using the given forecast
 
-export default function renderForecastWeatherCard(){
-    let dayHours = State.setsOfHours[State.forecastIdx];
-    console.log(dayHours)
+export default function renderForecastWeatherCard(nextForecastPage){
+    let setsOfHours = getSetsOfHours(State.weather);
+
+    let currentDayHours = setsOfHours[State.forecastIdx];
+    console.log(State.forecastIdx)
 
     let forecastWeatherEl = document.createElement("ul");
 
     forecastWeatherEl.addEventListener("click", (event) => {
 
-        handleClick();
+        handleClick(setsOfHours, nextForecastPage);
         forecastWeatherEl.removeEventListener("click", this);
     })
 
     forecastWeatherEl.classList.add("flex", "flex-row", "gap-1", "primary-anim");
 
-    for (let hour of dayHours){
+    for (let hour of currentDayHours){
 
         forecastWeatherEl.innerHTML += `
         <div style="width:100%" class="day">
@@ -36,14 +38,15 @@ export default function renderForecastWeatherCard(){
     return forecastWeatherEl;
 }
 
-function handleClick(){
+function handleClick(setsOfHours, nextForecastPage){
 
-    if (State.forecastIdx >= State.setsOfHours.length - 1){
+    console.log("gg")
+
+    if (State.forecastIdx >= setsOfHours.length - 1){
         State.forecastIdx = 0
     }else{
         State.forecastIdx++;
     }
 
-
-    render();
+    nextForecastPage();
 }

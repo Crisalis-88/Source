@@ -17,8 +17,8 @@ export function renderCurrentWeatherCard(){
     
     weatherEl.innerHTML = `
         <img class = "current-weather-icon mt-4" src="${currentIcon}" />
-        <h2 class="temperature">${temp}</h2>
-        <p class="card-text mt-2">${conditionDescription}</p>
+        <h2 class="temperature mt-2">${temp}</h2>
+        <p class="card-text">${conditionDescription}</p>
     `;
     
     const townEl = document.createElement("p");
@@ -27,4 +27,6 @@ export function renderCurrentWeatherCard(){
     townEl.textContent = State.town;
 
     weatherEl.prepend(townEl);
+
+    return weatherEl;
 } 

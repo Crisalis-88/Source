@@ -3,7 +3,7 @@
 
 :root{
   --bg:#e5e5e5d1;
-  --card-bg-color:#f8f8f8;
+  --card-bg-color:#f3f3f3;
   --primary-color:#212121ea;
   --secondary-color:#212121c8;
 
@@ -132,11 +132,16 @@ input{
   font-weight: var(--header-weight);
 }
 
+input::placeholder{
+  position: relative;
+  text-align: left;
+}
+
 .icon{
   position: absolute;
   width:20px;
   top:5px;
-  left:12px;
+  left:8px;
 }
 
 

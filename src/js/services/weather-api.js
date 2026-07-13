@@ -42,9 +42,9 @@ export async function getWeather(location){
       throw new Error("Failed to get user`s coords, using defaultLocation instead 2");
     }
 
-    console.log(`Latitude: ${lat}, Longitude: ${lon}`);
+    console.log(`Latitude: ${location.latitude}, Longitude: ${location.longitude}`);
 
-    let url = makeWeatherUrl(location, unitGroup, API_KEY, contentType);
+    let url = makeWeatherURL(location, unitGroup, API_KEY, contentType);
     console.log("url:", url)
 
     return await fetchWeather(url)
