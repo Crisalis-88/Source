@@ -3,7 +3,7 @@ import { makeWeatherURL } from "../utils/urls.js";
 
 const unitGroup = "metric";
 const contentType = 'json';
-const API_KEY = import.meta.env.VITE_API_KEY;
+const API_KEY = import.meta.env.VITE_API_KEY_WEATHER;
 
 // let weatherData = await getWeather(location);
 // console.log(weatherData)

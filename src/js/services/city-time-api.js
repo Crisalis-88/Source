@@ -1,27 +1,18 @@
 
+const API_KEY = import.meta.env.VITE_API_KEY_CITY;
 
 export default async function getTimeByCity(cityName){
     try{
-        const geoUrl = `https://open-meteo.com/${encodeURIComponent(cityName)}&count=1&language=en&format=json`;
+        const geoUrl = `https://timezone.abstractapi.com/v1/current_time/?api_key=${API_KEY}&location=${cityName}`;
 
         const response = await fetch(geoUrl);
-        console.log(response)
         let data = await response.json();
+        console.log("timeaoze.abstractapi:", data);
 
-        console.log(data)
-
-        const timeZone = data.results[0].timezone;
-
-         const exactLocalTime = new Intl.DateTimeFormat('en-US', {
-            timeZone: timezone,
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: false
-        }).format(new Date());
+        let exactLocalTime = data.datetime.split(" ")[-1];
 
         return exactLocalTime;
     }catch(error){
-        console.error(error)
+        console.error(error);
     }
 }

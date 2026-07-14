@@ -8,7 +8,7 @@ import getSetsOfHours from "../utils/getHoursSets.js";
 // produce html weather element and fill it using the given forecast
 
 export default function renderForecastWeatherCard(nextForecastPage){
-    let setsOfHours = getSetsOfHours(State.weather);
+    let setsOfHours = State.setsOfHours;
 
     let currentDayHours = setsOfHours[State.forecastIdx];
     console.log(State.forecastIdx)
