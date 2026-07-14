@@ -21,10 +21,10 @@ export let State = {
         }
         
         try{
-            this.userCityTime = await getTimeByCity(this.location);
+            // this.userCityTime = await getTimeByCity(this.location);
             this.weather = await getWeather(this.location);
             this.town = await getTown(this.location);
-            this.setsOfHours = getSetsOfHours(this.weather, this.userCityTime);
+            this.setsOfHours = getSetsOfHours(this.weather);
         }catch (error){
             console.log(`update error: ${error}`)
         }

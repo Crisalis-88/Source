@@ -12,8 +12,10 @@ export default function renderGreeting(){
             greetingEl.textContent = "Good Morning";
         case date > 12 && date < 16:
             greetingEl.textContent = "Good Afternoon";
-        default:
+        case date > 16 && date < 22:
             greetingEl.textContent = "Good Evening";
+        default:
+            greetingEl.textContent = "Good Night";
     }
 
     return greetingEl;

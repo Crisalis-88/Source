@@ -1,4 +1,4 @@
-
+import fetchAbortTimeout from "../utils/fetchAbortSignal.js";
 import { makeTownURL } from "../utils/urls.js"
 
 export async function getTown(location){
@@ -10,7 +10,7 @@ export async function getTown(location){
 
         let url = makeTownURL(location);
 
-        const res = await fetch(url);
+        const res = await fetch(url, fetchAbortTimeout);
 
         if (!res.ok){
             throw new Error("Failed to fetch user`s town");
@@ -22,7 +22,10 @@ export async function getTown(location){
         return data.locality;
     }
     catch(error){
-        console.error("error:", error);
+        if (error.name === "TimeoutError"){
+            console.error("timezone.abstractapi.com request timed out");
+        }
+        console.error(error);
         console.log("catch block", location);
         return location;
     }

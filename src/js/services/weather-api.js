@@ -1,5 +1,6 @@
 // import location from "./location.js";
 import { makeWeatherURL } from "../utils/urls.js";
+import fetchAbortTimeout from "../utils/fetchAbortSignal.js";
 
 const unitGroup = "metric";
 const contentType = 'json';
@@ -24,15 +25,23 @@ const API_KEY = import.meta.env.VITE_API_KEY_WEATHER;
 console.log("ergerg")
 
 async function fetchWeather(url){
-  let res = await fetch(url);
-
-  if (!res.ok){
-    throw new Error("request to weather api has failed");
+  try {
+    let res = await fetch(url, fetchAbortTimeout);
+  
+    if (!res.ok){
+      throw new Error("request to weather api has failed");
+    }
+  
+    let data = await res.json();
+  
+    return data;
+  }catch(error){
+    if (error.name === "TimeoutError"){
+      console.log("The weather request timed out");
+    }
+    console.log(error);
+    
   }
-
-  let data = await res.json();
-
-  return data;
 }
 
 export async function getWeather(location){

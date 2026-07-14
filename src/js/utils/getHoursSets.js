@@ -1,8 +1,10 @@
 import { date } from "./date.js";
 
 export default function getSetsOfHours(weather, userCityTime){
-    let startHour = userCityTime;
-    let endHour = userCityTime + 4;
+    let startHour = date;
+    let endHour = date + 4;
+
+    console.log(date)
 
     let setsOfHours = []
 

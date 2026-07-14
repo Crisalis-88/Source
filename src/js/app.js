@@ -21,8 +21,9 @@ export async function render(){
 }
 
 async function init (){
-
+    console.log("ddd")
     await State.update();
+    console.log("ddd")
     render();
     
     document.querySelector(".header").prepend(renderGreeting());
